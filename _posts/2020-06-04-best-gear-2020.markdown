@@ -1,0 +1,51 @@
+---
+layout: post
+title: My Favorite Gear in 2020
+categories: cycling data-science
+---
+
+I consider myself a minimalist. Often the topic of minimalism is focused on processes associated with how to get rid of things rather than the items that bring genuine value to an individual's life.
+
+In no particular order, below is a curated list of the products and services that have brought genuine value to my life in 2020.
+
+Cycling:
+- [TrainerRoad](https://www.trainerroad.com/)
+- [Wahoo kickr smart trainer](https://www.wahoofitness.com/devices/bike-trainers/wahoo-kickr-powertrainer)
+- [Wahoo kickr headwind bluetooth fan](https://www.wahoofitness.com/devices/bike-trainers/kickr-headwind-bluetooth-fan-us)
+- [Zwift](https://zwift.com/)
+- [zwiftpower.com ](https://zwiftpower.com)
+
+Productivity:
+- [Roam Research](https://roamresearch.com/)
+- [Todoist](https://todoist.com/)
+- [Logitech keyboard](https://www.logitech.com/en-us/product/mx-keys-wireless-keyboard)
+- [Logitech mouse](https://www.logitech.com/en-us/product/mx-master-3)
+- [Apple Airpod Pros](https://www.apple.com/airpods-pro/)
+- [Tiago Forte's Blog](https://fortelabs.co/)
+
+Clothing & Accesories:
+- [a soft and breathable black tee shirt](https://byltbasics.com/collections/crew/products/lux-basic-crew?variant=31379485884518)
+- [a durable, stylish, and functional backpack for work](https://www.aersf.com/tech-pack-2-black)
+
+Data Science:
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [alteryx](https://www.alteryx.com/)
+- [altair](https://altair-viz.github.io)
+- [Story Telling with Data by Cole Knaflic](https://www.amazon.com/gp/product/1119002257?imprToken=CcNyueQKIJF5MGfhtITh-Q&slotNum=0&ie=UTF8&creativeASIN=1119002257&linkCode=xm2&tag=storytellingwithdata-20)
+- [Datacamp](https://learn.datacamp.com/)
+- [Stackoverflow](https://stackoverflow.com/)
+
+Biohacking:
+- [Keto Mojo ketone & glucose monitor](https://keto-mojo.com/)
+- [Whoop](https://www.whoop.com/)
+- [Boundless by Ben Greenfield](https://www.amazon.com/Boundless-Upgrade-Brain-Optimize-Aging/dp/1628603976)
+
+
+Other:
+- [Refind](https://refind.com/)
+- [Robinhood](https://robinhood.com/)
+- [Contigo Coffee Mug](https://www.amazon.com/Contigo-AUTOSEAL-Vaccuum-Insulated-Stainless-Travel/dp/B073WB5DG9/ref=sr_1_9?crid=1Z5SBB2BK8HLQ&dchild=1&keywords=contigo+water+bottle&qid=1593058033&sprefix=contigo%2Caps%2C196&sr=8-9)
+
+
+
+
