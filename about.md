@@ -27,7 +27,7 @@ Check out my <a href="/now">now page</a> to see what I am currently up to.
 - Keras
 - TensorFlow
 
-##### Busines Intelligence & Other Tools
+##### Business Intelligence & Other Tools
 - Alteryx
 - Tableau
 - Git
