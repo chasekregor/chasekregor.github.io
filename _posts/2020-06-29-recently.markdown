@@ -32,7 +32,8 @@ Here is a photo of me cycling a couple of weeks ago in Rocky Mountain National P
 ![RMNP Cycling](/assets/images/rmnpcycling.jpeg)
 
 ## Recent Posts
-[https://chasekregor.com/productivity/2020/06/20/productivity-system/]
+- [My Current Productivity System](https://chasekregor.com/productivity/2020/06/20/productivity-system/)
+- [My Favorite Gear in 2020](https://chasekregor.com/cycling/data-science/2020/06/04/best-gear-2020/)
 
 ## Quotes I am Currently Pondering
 "I will keep constant watch over myself and—most usefully—will put each day up for review. For this is what makes us evil—that none of us looks back upon our own lives. We reflect upon only that which we are about to do. And yet our plans for the future descend from the past.” — Seneca
