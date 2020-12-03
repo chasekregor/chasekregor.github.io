@@ -14,6 +14,6 @@ title: now
 - Writing more at [chasekregor.com](www.chasekregor.com/blog)
 
 #### Play: 
-- Riding my bicycle somewhere in Colorado
-- Racing on [Zwift](https://zwift.com/) and [zwiftpower.com](https://zwiftpower.com/)
-- Training to get to 3 W/kg FTP
+- Obsessing over archery 
+- Reading and learning about how to bowhunt elk
+- Running, cycling, and strength training to loose weight
