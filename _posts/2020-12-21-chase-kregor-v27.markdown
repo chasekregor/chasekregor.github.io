@@ -2,7 +2,6 @@
 layout: post
 title: Chase Kregor v27.0
 categories: 
-location: Denver, CO
 ---
 
 Inspired by [Brad Feld's birthday posts](https://feld.com/archives/2020/12/bfeld-v55-0.html), I thought I would make my own. 
