@@ -21,6 +21,3 @@ This is an aspect of my life that I want to take much more seriously in a post C
 ### Time
 One thing that COVID and probably losing three grandparents in the last 18 months has taught me is how much more deliberate I need to be with my time, it's such a precious asset that I probably haven't valued enough. For some reason 27 seems like a big birthday to me, much more so in the past. 27 in some weird way always felt to symbolize true adulthood. In some ways, I feel both adequately and ill-prepared at the exact same time. Either way, I am excited to lean into that feeling. 
 
-Best, 
-Chase Kregor
-Denver, CO
