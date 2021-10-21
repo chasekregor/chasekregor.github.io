@@ -7,13 +7,12 @@ title: now
 ### What I Am Doing Now
 
 #### Work: 
-- Data Analyst @ [Spectrum Enterprise](https://enterprise.spectrum.com/) (Advanced Analytics, Product)
+- Senior Data Analyst @ [Strive Health](https://www.strivehealth.com/)
 
 #### Life: 
-- Partner to Abby Perkins
-- Writing more at [chasekregor.com](www.chasekregor.com/blog)
+- Engaged to Abby Perkins
+- Planning a wedding
 
 #### Play: 
-- Obsessing over archery 
-- Reading and learning about how to bowhunt elk
-- Running, cycling, and strength training to loose weight
+- Reading a lot lately
+- Getting into running

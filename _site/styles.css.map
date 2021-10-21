@@ -3,17 +3,17 @@
 	"file": "styles.css",
 	"sources": [
 		"styles.scss",
-		"../chasekregor.github.io/_sass/_variables.scss",
-		"../chasekregor.github.io/_sass/_base.scss",
-		"../chasekregor.github.io/_sass/_type.scss",
-		"../chasekregor.github.io/_sass/_syntax.scss",
-		"../chasekregor.github.io/_sass/_code.scss",
-		"../chasekregor.github.io/_sass/_layout.scss",
-		"../chasekregor.github.io/_sass/_masthead.scss",
-		"../chasekregor.github.io/_sass/_posts.scss",
-		"../chasekregor.github.io/_sass/_pagination.scss",
-		"../chasekregor.github.io/_sass/_message.scss",
-		"../chasekregor.github.io/_sass/_toc.scss"
+		"_sass/_variables.scss",
+		"_sass/_base.scss",
+		"_sass/_type.scss",
+		"_sass/_syntax.scss",
+		"_sass/_code.scss",
+		"_sass/_layout.scss",
+		"_sass/_masthead.scss",
+		"_sass/_posts.scss",
+		"_sass/_pagination.scss",
+		"_sass/_message.scss",
+		"_sass/_toc.scss"
 	],
 	"sourcesContent": [
 		"//\n//                        ___\n//                       /\\_ \\\n//  _____     ___     ___\\//\\ \\      __\n// /\\ '__`\\  / __`\\  / __`\\\\ \\ \\   /'__`\\\n// \\ \\ \\_\\ \\/\\ \\_\\ \\/\\ \\_\\ \\\\_\\ \\_/\\  __/\n//  \\ \\ ,__/\\ \\____/\\ \\____//\\____\\ \\____\\\n//   \\ \\ \\/  \\/___/  \\/___/ \\/____/\\/____/\n//    \\ \\_\\\n//     \\/_/\n//\n// Designed, built, and released under MIT license by @mdo. Learn more at\n// https://github.com/poole/poole.\n\n@import \"variables\";\n@import \"base\";\n@import \"type\";\n@import \"syntax\";\n@import \"code\";\n@import \"layout\";\n@import \"masthead\";\n@import \"posts\";\n@import \"pagination\";\n@import \"message\";\n@import \"toc\";\n\n// Sass for creating the swatches\n.colors {\n  display: grid;\n  grid-template-columns: max-content 1fr;\n\n  dt {\n    width: 3rem;\n    height: 3rem;\n    border-radius: var(--border-radius);\n    box-shadow: inset 0 0 0 1px rgba(255,255,255,.15);\n  }\n\n  dd {\n    margin-left: var(--spacer);\n  }\n}\n",

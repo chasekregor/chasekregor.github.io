@@ -36,11 +36,14 @@ Check out my <a href="/now">now page</a> to see what I am currently up to.
 - Visual Studio Code
 - Jupyter Notebooks
 - Regular Expressions
+- dbt
 
 #### Timeline:
-2020-*now*: Data Analyst @ [Spectrum Enterprise](https://enterprise.spectrum.com/) (Advanced Analytics, Product)  
-2018-2020: Data Analyst @ [DaVita](https://www.davita.com/) (Data Team, Compliance)  
-2013-2018: B.S. in Information Science, B.A. in Anthropology @ [University of Colorado](https://www.colorado.edu/cmci/infoscience) 
+- 2021-*now*: Senior Data Analyst @ [Strive Health](https://www.strivehealth.com/) 
+- 2021-2021: Data Analyst @ [Slack](https://slack.com/) (sales operations)
+- 2020-2021: Data Analyst @ [Spectrum Enterprise](https://enterprise.spectrum.com/) (product)
+- 2018-2020: Data Analyst @ [DaVita](https://www.davita.com/) (compliance)
+- 2013-2018: B.S. in Information Science, B.A. in Anthropology @ [University of Colorado](https://www.colorado.edu/cmci/infoscience) 
 
 
 #### Contact

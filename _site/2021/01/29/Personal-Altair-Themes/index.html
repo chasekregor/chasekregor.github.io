@@ -1,0 +1,915 @@
+{
+ "metadata": {
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5-final"
+  },
+  "orig_nbformat": 2,
+  "kernelspec": {
+   "name": "python3",
+   "display_name": "Python 3",
+   "language": "python"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2,
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import altair"
+   ]
+  },
+  {
+   "source": [
+    "## Related works\n",
+    "https://towardsdatascience.com/consistently-beautiful-visualizations-with-altair-themes-c7f9f889602"
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
+  },
+  {
+   "source": [
+    "## Why you would want to make your own theme"
+   ],
+   "cell_type": "markdown",
+   "metadata": {}
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-417d8d99ae244cb981bb0c115e929eb7\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-417d8d99ae244cb981bb0c115e929eb7\") {\n      outputDiv = document.getElementById(\"altair-viz-417d8d99ae244cb981bb0c115e929eb7\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 400}, \"mark\": {\"color\": \"black\", \"fill\": \"black\"}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": \"point\", \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 3
+    }
+   ],
+   "source": [
+    "import altair as alt\n",
+    "from vega_datasets import data\n",
+    "# define the theme by returning the dictionary of configurations\n",
+    "def black_marks():\n",
+    "    return {\n",
+    "        'config': {\n",
+    "            'view': {\n",
+    "                'height': 300,\n",
+    "                'width': 400,\n",
+    "            },\n",
+    "            'mark': {\n",
+    "                'color': 'black',\n",
+    "                'fill': 'black'\n",
+    "            }\n",
+    "        }\n",
+    "    }\n",
+    "# register the custom theme under a chosen name\n",
+    "alt.themes.register('black_marks', black_marks)\n",
+    "# enable the newly registered theme\n",
+    "alt.themes.enable('black_marks')\n",
+    "# draw the chart\n",
+    "cars = data.cars.url\n",
+    "alt.Chart(cars).mark_point().encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-b8797e355b8e44a291274d3478434419\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-b8797e355b8e44a291274d3478434419\") {\n      outputDiv = document.getElementById(\"altair-viz-b8797e355b8e44a291274d3478434419\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 400}, \"mark\": {\"color\": \"black\", \"fill\": \"black\"}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": {\"type\": \"point\", \"color\": \"black\", \"fill\": \"black\"}, \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 4
+    }
+   ],
+   "source": [
+    "alt.Chart(cars).mark_point(color = 'black', fill = 'black').encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/plain": [
+       "ThemeRegistry.enable('my_theme')"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 5
+    }
+   ],
+   "source": [
+    "def my_theme():\n",
+    "    return {\n",
+    "        'config': {\n",
+    "            'view': {\n",
+    "                'height': 300,\n",
+    "                'width': 400,\n",
+    "            },\n",
+    "            'mark': {\n",
+    "                'color': 'black',\n",
+    "                'fill': '#000000',\n",
+    "            },\n",
+    "            'axisLeft': {\n",
+    "                'labelFontSize': 30,\n",
+    "            },\n",
+    "        }\n",
+    "    }\n",
+    "# register the custom theme under a chosen name\n",
+    "alt.themes.register('my_theme', my_theme)\n",
+    "# enable the newly registered theme\n",
+    "alt.themes.enable('my_theme')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-1f17af5aba1e4b31991677464b4f5bb6\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-1f17af5aba1e4b31991677464b4f5bb6\") {\n      outputDiv = document.getElementById(\"altair-viz-1f17af5aba1e4b31991677464b4f5bb6\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 400}, \"mark\": {\"color\": \"black\", \"fill\": \"#000000\"}, \"axisLeft\": {\"labelFontSize\": 30}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": {\"type\": \"point\", \"color\": \"black\", \"fill\": \"black\"}, \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 6
+    }
+   ],
+   "source": [
+    "alt.Chart(cars).mark_point(color = 'black', fill = 'black').encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "display_data",
+     "data": {
+      "text/plain": "<IPython.core.display.HTML object>",
+      "text/html": "<style>\n@import url('https://fonts.googleapis.com/css?family=Lato');\n</style>\n"
+     },
+     "metadata": {}
+    }
+   ],
+   "source": [
+    "%%html\n",
+    "<style>\n",
+    "@import url('https://fonts.googleapis.com/css?family=Lato');\n",
+    "</style>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def urban_theme():\n",
+    "    font = \"Lato\"\n",
+    "    return {\n",
+    "        \"config\": {\n",
+    "            \"title\": {\n",
+    "                \"fontSize\": 18,\n",
+    "                \"font\": font,\n",
+    "                \"anchor\": \"start\", # equivalent of left-aligned.\n",
+    "                \"fontColor\": \"#000000\"\n",
+    "            }\n",
+    "        }\n",
+    "    }"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "error",
+     "ename": "NameError",
+     "evalue": "name 'font' is not defined",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+      "\u001b[0;32m~/opt/anaconda3/lib/python3.8/site-packages/altair/vegalite/v4/api.py\u001b[0m in \u001b[0;36mto_dict\u001b[0;34m(self, *args, **kwargs)\u001b[0m\n\u001b[1;32m    390\u001b[0m             \u001b[0;31m# apply theme from theme registry\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    391\u001b[0m             \u001b[0mthe_theme\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mthemes\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mget\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 392\u001b[0;31m             \u001b[0mdct\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mutils\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mupdate_nested\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mthe_theme\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdct\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcopy\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mTrue\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    393\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    394\u001b[0m             \u001b[0;31m# update datasets\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m<ipython-input-12-b6f93c14c6cb>\u001b[0m in \u001b[0;36murban_theme\u001b[0;34m()\u001b[0m\n\u001b[1;32m      4\u001b[0m             \"title\": {\n\u001b[1;32m      5\u001b[0m                 \u001b[0;34m\"fontSize\"\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0;36m18\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 6\u001b[0;31m                 \u001b[0;34m\"font\"\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0mfont\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      7\u001b[0m                 \u001b[0;34m\"anchor\"\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0;34m\"start\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;31m# equivalent of left-aligned.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      8\u001b[0m                 \u001b[0;34m\"fontColor\"\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0;34m\"#000000\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mNameError\u001b[0m: name 'font' is not defined"
+     ]
+    }
+   ],
+   "source": [
+    "alt.Chart(cars).mark_point(color = 'black', fill = 'black', font = 'Lato').encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/plain": [
+       "ThemeRegistry.enable('my_custom_theme')"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 23
+    }
+   ],
+   "source": [
+    "# register\n",
+    "alt.themes.register(\"my_custom_theme\", urban_theme)\n",
+    "# enable\n",
+    "alt.themes.enable(\"my_custom_theme\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def urban_theme():\n",
+    "    # Typography\n",
+    "    font = \"Lato\"\n",
+    "    # At Urban it's the same font for all text but it's good to keep them separate in case you want to change one later.\n",
+    "    labelFont = \"Lato\" \n",
+    "    sourceFont = \"Lato\"\n",
+    "    # Axes\n",
+    "    axisColor = \"#000000\"\n",
+    "    gridColor = \"#DEDDDD\"\n",
+    "    return {\n",
+    "        \"config\": {\n",
+    "            \"title\": {\n",
+    "                \"fontSize\": 18,\n",
+    "                \"font\": font,\n",
+    "                \"anchor\": \"start\", # equivalent of left-aligned.\n",
+    "                \"fontColor\": \"#000000\"\n",
+    "            },\n",
+    "            \"axisX\": {\n",
+    "                \"domain\": True,\n",
+    "                \"domainColor\": axisColor,\n",
+    "                \"domainWidth\": 1,\n",
+    "                \"grid\": False,\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"labelAngle\": 0, \n",
+    "                \"tickColor\": axisColor,\n",
+    "                \"tickSize\": 5, # default, including it just to show you can change it\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"titlePadding\": 10, # guessing, not specified in styleguide\n",
+    "                \"title\": \"X Axis Title (units)\", \n",
+    "            },\n",
+    "            \"axisY\": {\n",
+    "                \"domain\": False,\n",
+    "                \"grid\": True,\n",
+    "                \"gridColor\": gridColor,\n",
+    "                \"gridWidth\": 1,\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"labelAngle\": 0, \n",
+    "                \"ticks\": False, # even if you don't have a \"domain\" you need to turn these off.\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"titlePadding\": 10, # guessing, not specified in styleguide\n",
+    "                \"title\": \"Y Axis Title (units)\", \n",
+    "                # titles are by default vertical left of axis so we need to hack this \n",
+    "                \"titleAngle\": 0, # horizontal\n",
+    "                \"titleY\": -10, # move it up\n",
+    "                \"titleX\": 18, # move it to the right so it aligns with the labels \n",
+    "            },\n",
+    "}\n",
+    "    }\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-33e765ad6c0a412098c54fedd4fe37da\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-33e765ad6c0a412098c54fedd4fe37da\") {\n      outputDiv = document.getElementById(\"altair-viz-33e765ad6c0a412098c54fedd4fe37da\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"title\": {\"fontSize\": 18, \"font\": \"Lato\", \"anchor\": \"start\", \"fontColor\": \"#000000\"}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": {\"type\": \"point\", \"color\": \"black\", \"fill\": \"black\"}, \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 26
+    }
+   ],
+   "source": [
+    "alt.Chart(cars).mark_point(color = 'black', fill = 'black').encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def urban_theme():\n",
+    "    # Typography\n",
+    "    font = \"Lato\"\n",
+    "    # At Urban it's the same font for all text but it's good to keep them separate in case you want to change one later.\n",
+    "    labelFont = \"Lato\" \n",
+    "    sourceFont = \"Lato\"\n",
+    "    # Axes\n",
+    "    axisColor = \"#000000\"\n",
+    "    gridColor = \"#DEDDDD\"\n",
+    "    # Colors\n",
+    "    main_palette = [\"#1696d2\", \n",
+    "                    \"#d2d2d2\",\n",
+    "                    \"#000000\", \n",
+    "                    \"#fdbf11\", \n",
+    "                    \"#ec008b\", \n",
+    "                    \"#55b748\", \n",
+    "                    \"#5c5859\", \n",
+    "                    \"#db2b27\", \n",
+    "                   ]\n",
+    "    sequential_palette = [\"#cfe8f3\", \n",
+    "                          \"#a2d4ec\", \n",
+    "                          \"#73bfe2\", \n",
+    "                          \"#46abdb\", \n",
+    "                          \"#1696d2\", \n",
+    "                          \"#12719e\",]\n",
+    "    return {\n",
+    "        # width and height are configured outside the config dict because they are Chart configurations/properties not chart-elements' configurations/properties.\n",
+    "        \"width\": 685, # from the guide\n",
+    "        \"height\": 380, # not in the guide\n",
+    "        \"config\": {\n",
+    "            \"title\": {\n",
+    "                \"fontSize\": 18,\n",
+    "                \"font\": font,\n",
+    "                \"anchor\": \"start\", # equivalent of left-aligned.\n",
+    "                \"fontColor\": \"#000000\"\n",
+    "            },\n",
+    "            \"axisX\": {\n",
+    "                \"domain\": True,\n",
+    "                \"domainColor\": axisColor,\n",
+    "                \"domainWidth\": 1,\n",
+    "                \"grid\": False,\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"labelAngle\": 0, \n",
+    "                \"tickColor\": axisColor,\n",
+    "                \"tickSize\": 5, # default, including it just to show you can change it\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"titlePadding\": 10, # guessing, not specified in styleguide\n",
+    "                \"title\": \"X Axis Title (units)\", \n",
+    "            },\n",
+    "            \"axisY\": {\n",
+    "                \"domain\": False,\n",
+    "                \"grid\": True,\n",
+    "                \"gridColor\": gridColor,\n",
+    "                \"gridWidth\": 1,\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"labelAngle\": 0, \n",
+    "                \"ticks\": False, # even if you don't have a \"domain\" you need to turn these off.\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"titlePadding\": 10, # guessing, not specified in styleguide\n",
+    "                \"title\": \"Y Axis Title (units)\", \n",
+    "                # titles are by default vertical left of axis so we need to hack this \n",
+    "                \"titleAngle\": 0, # horizontal\n",
+    "                \"titleY\": -10, # move it up\n",
+    "                \"titleX\": 18, # move it to the right so it aligns with the labels \n",
+    "            },\n",
+    "            \"range\": {\n",
+    "                \"category\": main_palette,\n",
+    "                \"diverging\": sequential_palette,\n",
+    "            },\n",
+    "            \"legend\": {\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"symbolType\": \"square\", # just 'cause\n",
+    "                \"symbolSize\": 100, # default\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"title\": \"\", # set it to no-title by default\n",
+    "                \"orient\": \"top-left\", # so it's right next to the y-axis\n",
+    "                \"offset\": 0, # literally right next to the y-axis.\n",
+    "            },\n",
+    "            \"view\": {\n",
+    "                \"stroke\": \"transparent\", # altair uses gridlines to box the area where the data is visualized. This takes that off.\n",
+    "            },\n",
+    "            \"background\": {\n",
+    "                \"color\": \"#FFFFFF\", # white rather than transparent\n",
+    "            },\n",
+    "            ### MARKS CONFIGURATIONS ###\n",
+    "            \"area\": {\n",
+    "               \"fill\": markColor,\n",
+    "           },\n",
+    "           \"line\": {\n",
+    "               \"color\": markColor,\n",
+    "               \"stroke\": markColor,\n",
+    "               \"strokeWidth\": 5,\n",
+    "           },\n",
+    "           \"trail\": {\n",
+    "               \"color\": markColor,\n",
+    "               \"stroke\": markColor,\n",
+    "               \"strokeWidth\": 0,\n",
+    "               \"size\": 1,\n",
+    "           },\n",
+    "           \"path\": {\n",
+    "               \"stroke\": markColor,\n",
+    "               \"strokeWidth\": 0.5,\n",
+    "           },\n",
+    "           \"point\": {\n",
+    "               \"filled\": True,\n",
+    "           },\n",
+    "           \"text\": {\n",
+    "               \"font\": sourceFont,\n",
+    "               \"color\": markColor,\n",
+    "               \"fontSize\": 11,\n",
+    "               \"align\": \"right\",\n",
+    "               \"fontWeight\": 400,\n",
+    "               \"size\": 11,\n",
+    "           }, \n",
+    "           \"bar\": {\n",
+    "                \"size\": 40,\n",
+    "                \"binSpacing\": 1,\n",
+    "                \"continuousBandSize\": 30,\n",
+    "                \"discreteBandSize\": 30,\n",
+    "                \"fill\": markColor,\n",
+    "                \"stroke\": False,\n",
+    "            },\n",
+    "}\n",
+    "    }"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/plain": [
+       "{'config': {'view': {'continuousWidth': 800, 'continuousHeight': 500}}}"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 47
+    }
+   ],
+   "source": [
+    ">>> import altair as alt\n",
+    ">>> default = alt.themes.get()\n",
+    ">>> default()\n",
+    "{'config': {'view': {'continuousWidth': 800, 'continuousHeight': 500}}}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/plain": [
+       "ThemeRegistry.enable('default')"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 45
+    }
+   ],
+   "source": [
+    "alt.themes.enable('default')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-a0461e519b684a5587fce3b279ba1c00\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-a0461e519b684a5587fce3b279ba1c00\") {\n      outputDiv = document.getElementById(\"altair-viz-a0461e519b684a5587fce3b279ba1c00\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"continuousWidth\": 400, \"continuousHeight\": 300}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": \"point\", \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 48
+    }
+   ],
+   "source": [
+    "chart =alt.Chart(cars).mark_point().encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-c348da21ec404e40890decfd6165bf28\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-c348da21ec404e40890decfd6165bf28\") {\n      outputDiv = document.getElementById(\"altair-viz-c348da21ec404e40890decfd6165bf28\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 500}, \"mark\": {\"color\": \"black\", \"fill\": \"black\"}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": \"point\", \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 55
+    }
+   ],
+   "source": [
+    "import altair as alt\n",
+    "from vega_datasets import data\n",
+    "\n",
+    "# define the theme by returning the dictionary of configurations\n",
+    "def black_marks():\n",
+    "    return {\n",
+    "        'config': {\n",
+    "            'view': {\n",
+    "                'height': 300,\n",
+    "                'width': 500,\n",
+    "            },\n",
+    "            'mark': {\n",
+    "                'color': 'black',\n",
+    "                'fill': 'black'\n",
+    "            }\n",
+    "        }\n",
+    "    }\n",
+    "\n",
+    "# register the custom theme under a chosen name\n",
+    "alt.themes.register('black_marks', black_marks)\n",
+    "\n",
+    "# enable the newly registered theme\n",
+    "alt.themes.enable('black_marks')\n",
+    "\n",
+    "# draw the chart\n",
+    "cars = data.cars.url\n",
+    "alt.Chart(cars).mark_point().encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-ece3b0221eb24453a377a9feff2ce052\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-ece3b0221eb24453a377a9feff2ce052\") {\n      outputDiv = document.getElementById(\"altair-viz-ece3b0221eb24453a377a9feff2ce052\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 500}, \"mark\": {\"color\": \"black\", \"fill\": \"black\"}, \"title\": {\"align\": \"center\", \"anchor\": \"start\", \"color\": \"gray\", \"font\": \"Courier\", \"fontSize\": 20}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": \"point\", \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"title\": \"Cars Data\", \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 62
+    }
+   ],
+   "source": [
+    "import altair as alt\n",
+    "from vega_datasets import data\n",
+    "\n",
+    "source = data.cars.url\n",
+    "\n",
+    "chart = alt.Chart(source).mark_point().encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q',\n",
+    ").properties(\n",
+    "    title='Cars Data'\n",
+    ")\n",
+    "\n",
+    "chart.configure_title(\n",
+    "    fontSize=20,\n",
+    "    font='Courier',\n",
+    "    anchor='start',\n",
+    "    color='gray',\n",
+    "    align= 'center'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def urban_theme():\n",
+    "    # Typography\n",
+    "    font = \"Lato\"\n",
+    "    # At Urban it's the same font for all text but it's good to keep them separate in case you want to change one later.\n",
+    "    labelFont = \"Lato\" \n",
+    "    sourceFont = \"Lato\"\n",
+    "    # Axes\n",
+    "    axisColor = \"#000000\"\n",
+    "    gridColor = \"#DEDDDD\"\n",
+    "    # Colors\n",
+    "    main_palette = [\"#1696d2\", \n",
+    "                    \"#d2d2d2\",\n",
+    "                    \"#000000\", \n",
+    "                    \"#fdbf11\", \n",
+    "                    \"#ec008b\", \n",
+    "                    \"#55b748\", \n",
+    "                    \"#5c5859\", \n",
+    "                    \"#db2b27\", \n",
+    "                   ]\n",
+    "    sequential_palette = [\"#cfe8f3\", \n",
+    "                          \"#a2d4ec\", \n",
+    "                          \"#73bfe2\", \n",
+    "                          \"#46abdb\", \n",
+    "                          \"#1696d2\", \n",
+    "                          \"#12719e\", \n",
+    "                         ]\n",
+    "    return {\n",
+    "        # width and height are configured outside the config dict because they are Chart configurations/properties not chart-elements' configurations/properties.\n",
+    "        \"width\": 685, # from the guide\n",
+    "        \"height\": 380, # not in the guide\n",
+    "        \"config\": {\n",
+    "            \"title\": {\n",
+    "                \"fontSize\": 18,\n",
+    "                \"font\": font,\n",
+    "                \"anchor\": \"start\", # equivalent of left-aligned.\n",
+    "                \"fontColor\": \"#000000\"\n",
+    "            },\n",
+    "            \"axisX\": {\n",
+    "                \"domain\": True,\n",
+    "                \"domainColor\": axisColor,\n",
+    "                \"domainWidth\": 1,\n",
+    "                \"grid\": False,\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"labelAngle\": 0, \n",
+    "                \"tickColor\": axisColor,\n",
+    "                \"tickSize\": 5, # default, including it just to show you can change it\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"titlePadding\": 10, # guessing, not specified in styleguide\n",
+    "                \"title\": \"X Axis Title (units)\", \n",
+    "            },\n",
+    "            \"axisY\": {\n",
+    "                \"domain\": False,\n",
+    "                \"grid\": True,\n",
+    "                \"gridColor\": gridColor,\n",
+    "                \"gridWidth\": 1,\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"labelAngle\": 0, \n",
+    "                \"ticks\": False, # even if you don't have a \"domain\" you need to turn these off.\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"titlePadding\": 10, # guessing, not specified in styleguide\n",
+    "                \"title\": \"Y Axis Title (units)\", \n",
+    "                # titles are by default vertical left of axis so we need to hack this \n",
+    "                \"titleAngle\": 0, # horizontal\n",
+    "                \"titleY\": -10, # move it up\n",
+    "                \"titleX\": 18, # move it to the right so it aligns with the labels \n",
+    "            },\n",
+    "            \"range\": {\n",
+    "                \"category\": main_palette,\n",
+    "                \"diverging\": sequential_palette,\n",
+    "            },\n",
+    "            \"legend\": {\n",
+    "                \"labelFont\": labelFont,\n",
+    "                \"labelFontSize\": 12,\n",
+    "                \"symbolType\": \"square\", # just 'cause\n",
+    "                \"symbolSize\": 100, # default\n",
+    "                \"titleFont\": font,\n",
+    "                \"titleFontSize\": 12,\n",
+    "                \"title\": \"\", # set it to no-title by default\n",
+    "                \"orient\": \"top-left\", # so it's right next to the y-axis\n",
+    "                \"offset\": 0, # literally right next to the y-axis.\n",
+    "            },\n",
+    "            \"view\": {\n",
+    "                \"stroke\": \"transparent\", # altair uses gridlines to box the area where the data is visualized. This takes that off.\n",
+    "            },\n",
+    "            \"background\": {\n",
+    "                \"color\": \"#FFFFFF\", # white rather than transparent\n",
+    "            },\n",
+    "            ### MARKS CONFIGURATIONS ###\n",
+    "            \"area\": {\n",
+    "               \"fill\": markColor,\n",
+    "           },\n",
+    "           \"line\": {\n",
+    "               \"color\": markColor,\n",
+    "               \"stroke\": markColor,\n",
+    "               \"strokeWidth\": 5,\n",
+    "           },\n",
+    "           \"trail\": {\n",
+    "               \"color\": markColor,\n",
+    "               \"stroke\": markColor,\n",
+    "               \"strokeWidth\": 0,\n",
+    "               \"size\": 1,\n",
+    "           },\n",
+    "           \"path\": {\n",
+    "               \"stroke\": markColor,\n",
+    "               \"strokeWidth\": 0.5,\n",
+    "           },\n",
+    "           \"point\": {\n",
+    "               \"filled\": True,\n",
+    "           },\n",
+    "           \"text\": {\n",
+    "               \"font\": sourceFont,\n",
+    "               \"color\": markColor,\n",
+    "               \"fontSize\": 11,\n",
+    "               \"align\": \"right\",\n",
+    "               \"fontWeight\": 400,\n",
+    "               \"size\": 11,\n",
+    "           }, \n",
+    "           \"bar\": {\n",
+    "                \"size\": 40,\n",
+    "                \"binSpacing\": 1,\n",
+    "                \"continuousBandSize\": 30,\n",
+    "                \"discreteBandSize\": 30,\n",
+    "                \"fill\": markColor,\n",
+    "                \"stroke\": False,\n",
+    "            },\n",
+    "}\n",
+    "    }"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 67,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-c87209b456b74d269a2935bfa85f9621\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-c87209b456b74d269a2935bfa85f9621\") {\n      outputDiv = document.getElementById(\"altair-viz-c87209b456b74d269a2935bfa85f9621\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 500}, \"mark\": {\"color\": \"black\", \"fill\": \"black\"}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": \"point\", \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"title\": \"Cars Data Is the Only One\", \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 67
+    }
+   ],
+   "source": [
+    "chart = alt.Chart(source).mark_point().encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q',\n",
+    ").properties(\n",
+    "    title='Cars Data Is the Only One'\n",
+    ")\n",
+    "chart"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 70,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-9c7a5992c552428185fcb542139eae7f\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-9c7a5992c552428185fcb542139eae7f\") {\n      outputDiv = document.getElementById(\"altair-viz-9c7a5992c552428185fcb542139eae7f\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 500}, \"mark\": {\"color\": \"black\", \"fill\": \"black\"}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": \"bar\", \"encoding\": {\"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"title\": \"Cars Data Is the Only One\", \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 70
+    }
+   ],
+   "source": [
+    "alt.Chart(source).mark_bar().encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q',\n",
+    "    ).properties(\n",
+    "    title='Cars Data Is the Only One'\n",
+    ")\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "metadata": {},
+   "outputs": [
+    {
+     "output_type": "execute_result",
+     "data": {
+      "text/html": "\n<div id=\"altair-viz-a5e65a10134d4e87a786d375477667b0\"></div>\n<script type=\"text/javascript\">\n  (function(spec, embedOpt){\n    let outputDiv = document.currentScript.previousElementSibling;\n    if (outputDiv.id !== \"altair-viz-a5e65a10134d4e87a786d375477667b0\") {\n      outputDiv = document.getElementById(\"altair-viz-a5e65a10134d4e87a786d375477667b0\");\n    }\n    const paths = {\n      \"vega\": \"https://cdn.jsdelivr.net/npm//vega@5?noext\",\n      \"vega-lib\": \"https://cdn.jsdelivr.net/npm//vega-lib?noext\",\n      \"vega-lite\": \"https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext\",\n      \"vega-embed\": \"https://cdn.jsdelivr.net/npm//vega-embed@6?noext\",\n    };\n\n    function loadScript(lib) {\n      return new Promise(function(resolve, reject) {\n        var s = document.createElement('script');\n        s.src = paths[lib];\n        s.async = true;\n        s.onload = () => resolve(paths[lib]);\n        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);\n        document.getElementsByTagName(\"head\")[0].appendChild(s);\n      });\n    }\n\n    function showError(err) {\n      outputDiv.innerHTML = `<div class=\"error\" style=\"color:red;\">${err}</div>`;\n      throw err;\n    }\n\n    function displayChart(vegaEmbed) {\n      vegaEmbed(outputDiv, spec, embedOpt)\n        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));\n    }\n\n    if(typeof define === \"function\" && define.amd) {\n      requirejs.config({paths});\n      require([\"vega-embed\"], displayChart, err => showError(`Error loading script: ${err.message}`));\n    } else if (typeof vegaEmbed === \"function\") {\n      displayChart(vegaEmbed);\n    } else {\n      loadScript(\"vega\")\n        .then(() => loadScript(\"vega-lite\"))\n        .then(() => loadScript(\"vega-embed\"))\n        .catch(showError)\n        .then(() => displayChart(vegaEmbed));\n    }\n  })({\"config\": {\"view\": {\"height\": 300, \"width\": 400}, \"range\": {\"category\": {\"scheme\": \"set2\"}}}, \"data\": {\"url\": \"https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/cars.json\"}, \"mark\": \"point\", \"encoding\": {\"color\": {\"type\": \"nominal\", \"field\": \"Origin\"}, \"x\": {\"type\": \"quantitative\", \"field\": \"Horsepower\"}, \"y\": {\"type\": \"quantitative\", \"field\": \"Miles_per_Gallon\"}}, \"$schema\": \"https://vega.github.io/schema/vega-lite/v4.8.1.json\"}, {\"mode\": \"vega-lite\"});\n</script>",
+      "text/plain": [
+       "alt.Chart(...)"
+      ]
+     },
+     "metadata": {},
+     "execution_count": 71
+    }
+   ],
+   "source": [
+    "import altair as alt\n",
+    "from vega_datasets import data\n",
+    "\n",
+    "# define the theme by returning the dictionary of configurations\n",
+    "def my_theme():\n",
+    "    return {\n",
+    "        'config': {\n",
+    "            'view': {\n",
+    "                'height': 300,\n",
+    "                'width': 400,\n",
+    "            },\n",
+    "            'range': {\n",
+    "                'category': {'scheme':'set2'}\n",
+    "            }\n",
+    "        }\n",
+    "    }\n",
+    "\n",
+    "# register the custom theme under a chosen name\n",
+    "alt.themes.register('my_theme', my_theme)\n",
+    "\n",
+    "# enable the newly registered theme\n",
+    "alt.themes.enable('my_theme')\n",
+    "\n",
+    "# draw the chart\n",
+    "cars = data.cars.url\n",
+    "alt.Chart(cars).mark_point().encode(\n",
+    "    x='Horsepower:Q',\n",
+    "    y='Miles_per_Gallon:Q', \n",
+    "    color='Origin:N'\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 73,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#https://vega.github.io/vega/docs/config/#scale-range"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ]
+}
