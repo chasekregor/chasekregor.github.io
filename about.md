@@ -3,7 +3,7 @@ layout: default
 title: About
 ---
 
-<img src="{{site.baseurl}}/assets/images/headshot.jpeg" width="50%" height="50%">
+<img src="{{site.baseurl}}/assets/images/headshot2021.jpg" width="50%" height="50%">
 
  Hi, I'm Chase Kregor. I'm a data scientist, cyclist, and writer located in Denver, CO. My expertise is in using data science, business, and communication to solve real-world problems.
 

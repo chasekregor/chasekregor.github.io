@@ -8,9 +8,7 @@ permalink: pretty
 
 pages_list:
   About: '/about'       
-  Writing: '/writing'
-  Cycling: '/cycling'
-  Data Science: '/data-science'
+  Blog: '/writing'
   Now: '/now'
 
   
