@@ -4,7 +4,7 @@ title: Chase Kregor v28.0
 categories: 
 ---
 
-Inspired by [Brad Feld’s birthday posts](https://feld.com/archives/2020/12/bfeld-v55-0.html), and [last year's post],(https://chasekregor.com/2020/12/21/chase-kregor-v27/) I thought I would make my own.
+Inspired by [Brad Feld’s birthday posts](https://feld.com/archives/2020/12/bfeld-v55-0.html), and [last year's post](https://chasekregor.com/2020/12/21/chase-kregor-v27/), I thought I would make my own.
 
 ### Work
 
@@ -36,8 +36,8 @@ I proposed to Abby and she said yes. It is the proudest accomplishment of my lif
 
 Lost my last grandparent this year. You have a lot less time than you realize. Try to make today and every day after it count. 
 
-## Goals
-Get married in 2022.
-To consistently and simultaneously work out AND work at my job very hard. In the past, I have done one of these things very well sacrificing performance on the other. This year I really want to focus on optimizing the two of these areas of my life.  
-Learn more about personal finance and what it means for me
-Explore the topic of leadership, reading about great leaders throughout history. 
+### Goals
+- Get married in 2022.
+- To consistently and simultaneously work out AND work at my job very hard. In the past, I have done one of these things very well sacrificing performance on the other. This year I really want to focus on optimizing the two of these areas of my life.  
+- Learn more about personal finance and what it means for me
+- Explore the topic of leadership, reading about great leaders throughout history. 
