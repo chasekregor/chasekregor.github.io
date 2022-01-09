@@ -1,0 +1,40 @@
+---
+layout: post
+title: My Favorite Gear in 2021
+categories: gear
+---
+
+I consider myself a minimalist. Often the topic of minimalism is focused on processes associated with how to get rid of things rather than the items that bring genuine value to an individual's life.
+
+In no particular order, below is a curated list of the products and services that have brought genuine value to my life in 2021.
+
+Running:
+- [Hoka One One Cliftons](https://www.hoka.com/en/us/)
+- [Lululemon Surge Lined Short 6"](https://shop.lululemon.com/p/men-shorts/Surge-Short-6-OOM-Liner/_/prod9010032?color=0001)
+- [Squirrels Nut Butter](https://squirrelsnutbutter.com/)
+- [Patagonia Men's R1® TechFace Hoody](https://www.patagonia.com/product/mens-r1-techface-hoody/83576.html)
+
+Productivity:
+- [Obsidian](https://obsidian.md/)
+- [Todoist](https://todoist.com/)
+- [Logitech keyboard](https://www.logitech.com/en-us/product/mx-keys-wireless-keyboard)
+- [Logitech mouse](https://www.logitech.com/en-us/product/mx-master-3)
+- [Apple Airpod Pros](https://www.apple.com/airpods-pro/)
+
+Clothing & Accesories:
+- [Evergoods Civic Half Zip 26L Backpack](https://evergoods.us/collections/civic/products/civic-half-zip-26l)
+- [On-running The Roger Clubhouse](https://www.on-running.com/en-us/products/theroger-clubhouse/mens/black-white)
+
+Data Science:
+- [PyCharm professional license](https://www.jetbrains.com/pycharm/)
+- [dbt](https://www.getdbt.com/)
+
+Biohacking:
+- [Whoop](https://www.whoop.com/)
+
+Other:
+- [Garmin inreach satelite communicaiton device](https://discover.garmin.com/en-US/inreach/personal/)
+
+
+
+
